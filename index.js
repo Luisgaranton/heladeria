@@ -38,9 +38,20 @@ app.delete('/sabores', (req, res) => {
   res.json({"mensaje": mensaje});
 })
 
-app.put('/sabores', (req, res) => {
-  res.send('modificar o actualizar sabores');
-})
+app.put('/sabores/:antiguo_sabor/modificar/:nuevo_sabor', (req, res) => {
+  const antiguo_sabor = req.params.antiguo_sabor;
+  const nuevo_sabor  = req.params.nuevo_sabor;
+  var mensaje = "no se encontro el sabor";
+  for(i = 0; i<basededatos_sabores.length; i++){
+    if(basededatos_sabores[i] == antiguo_sabor){
+      basededatos_sabores[i] = nuevo_sabor;
+      mensaje = "se modifico el sabor espesificado";
+    }
+  }
+  res.json({"mensaje":mensaje});
+});
+
+
 
 app.get('')
 app.listen(port, () => {
